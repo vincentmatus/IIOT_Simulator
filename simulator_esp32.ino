@@ -35,11 +35,13 @@
 
 #include <BlynkSimpleEsp32.h>
 
+unsigned long v1 =0;
 char auth[] = "tpZ0QYNFuASYweqRJ2xjxkOo-kJtZrJI";
 
+// char ssid[] = "DesktopAP-2.4G";
+// char pass[] = "ap191140";
 char ssid[] = "VCWF";
 char pass[] = "12930A11";
-
 int ontime=0,offtime=0;
 float freq=0,period=0;
 
@@ -49,7 +51,8 @@ void setup()
   Serial.begin(9600);
   delay(10); 
   
-  ledcAttachPin(5, 1);
+  ledcAttachPin(2, 1);
+  ledcAttachPin(14, 2);
   
   // Initialize channels 
   // channels 0-15, resolution 1-16 bits, freq limits depend on resolution
@@ -71,12 +74,23 @@ BLYNK_WRITE(V0){
   Serial.println(y);
 }
 
+BLYNK_WRITE(V1){
+  unsigned long value = param.asInt();
+  v1 = map(value,4,20,0,1023);
+  ledcSetup(2, 5000, 10);
+  ledcWrite(2, v1);
+  Serial.print("value_420: ");
+  Serial.println(value);
+  Serial.print("y_420: ");
+  Serial.println(v1);
+}
+
 void loop() 
 {
   Blynk.run();
   freqMeasure();
-  ledcWrite(1, 1022);
-
+  ledcWrite(1, 1023);
+  
 
 
 
