@@ -57,7 +57,7 @@ void setup()
   // Initialize channels 
   // channels 0-15, resolution 1-16 bits, freq limits depend on resolution
   // ledcSetup(uint8_t channel, uint32_t freq, uint8_t resolution_bits);
-  ledcSetup(1, 4000, 10); // 400 Hz PWM, 10-bit resolution
+  ledcSetup(1, 400, 8); // 400 Hz PWM, 10-bit resolution
 
   Serial.println("Start");
   Blynk.begin(auth, ssid, pass, "blynk.iot-cm.com", 8080);
@@ -66,8 +66,8 @@ void setup()
 
 BLYNK_WRITE(V0){
   unsigned long value = param.asInt();
-  unsigned long y = map(value,1,100,1,100000);
-  ledcSetup(1, y, 10);
+  unsigned long y = map(value,1,100,1000,100000);
+  ledcSetup(1, y, 8);
   Serial.print("value: ");
   Serial.println(value);
   Serial.print("y: ");
@@ -89,7 +89,7 @@ void loop()
 {
   Blynk.run();
   freqMeasure();
-  ledcWrite(1, 1023);
+  ledcWrite(1, 128);
   
 
 
