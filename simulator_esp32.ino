@@ -32,16 +32,17 @@
 /* Comment this out to disable prints and save space */
 #define BLYNK_PRINT Serial
 #define pulse_ip 12
+#define DAC1 25
 
 #include <BlynkSimpleEsp32.h>
 
 unsigned long v1 =0;
 char auth[] = "tpZ0QYNFuASYweqRJ2xjxkOo-kJtZrJI";
 
-// char ssid[] = "DesktopAP-2.4G";
-// char pass[] = "ap191140";
-char ssid[] = "VCWF";
-char pass[] = "12930A11";
+char ssid[] = "DesktopAP-2.4G";
+char pass[] = "ap191140";
+//char ssid[] = "VCWF";
+//char pass[] = "12930A11";
 int ontime=0,offtime=0;
 float freq=0,period=0;
 
@@ -74,11 +75,21 @@ BLYNK_WRITE(V0){
   Serial.println(y);
 }
 
+//BLYNK_WRITE(V1){
+//  unsigned long value = param.asInt();
+//  v1 = map(value,4,20,0,1023);
+//  ledcSetup(2, 5000, 10);
+//  ledcWrite(2, v1);
+//  Serial.print("value_420: ");
+//  Serial.println(value);
+//  Serial.print("y_420: ");
+//  Serial.println(v1);
+//}
+
 BLYNK_WRITE(V1){
   unsigned long value = param.asInt();
-  v1 = map(value,4,20,0,1023);
-  ledcSetup(2, 5000, 10);
-  ledcWrite(2, v1);
+  v1 = map(value,4,20,0,255);
+  dacWrite(DAC1, v1);
   Serial.print("value_420: ");
   Serial.println(value);
   Serial.print("y_420: ");
