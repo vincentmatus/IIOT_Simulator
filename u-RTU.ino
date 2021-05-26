@@ -246,14 +246,13 @@ EMPTY_INTERRUPT (TIMER1_COMPB_vect);
 
 
 
-
 void loop() {
-  uint8_t result ;
+
   uint16_t data[10];
   uint16_t ticks;
-  getHoldingRegisters(device1, 0x0000, 10, 1);
+  data = getHoldingRegisters(device1, 0x0000, 10, 1);
 
-  
+
  resultsMap [0]= (results [0]*100.0)/1023.0;
  if (CaptureTimer::getTicks(&ticks) == true){
     (void) CaptureTimer::getFreq(&ticks);
@@ -262,20 +261,21 @@ void loop() {
 
 
  
-    String text = "{\"on\":"+ String(1) +" ,\"ipc\":"+ String(ipc) +" ,\"vcl\":"+ String(resultsMap [0])+" ,\"tot\":"+ String(tot) +" ,\"bad\":"+ String(bad) +"}";
+    String text = "{"on":"+ String(1) +" ,"ipc":"+ String(ticks) +" ,"vcl":"+ String(resultsMap [0])+" ,"tot":"+ String(data[1]) +" ,"bad":"+ String(data[2]) +"}";
      Serial.println(text);
     //Serial.println(around);
      client.publish("RTU", text);
      delay (1000);
   if (!client.connected()) {
-   
+
     connect();
     }
     Serial.println(String(!client.connected()));
-     
-     
+
+
  
-  
+
  
 
 }
+
