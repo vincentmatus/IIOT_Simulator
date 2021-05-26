@@ -41,8 +41,7 @@ char auth[] = "tpZ0QYNFuASYweqRJ2xjxkOo-kJtZrJI";
 
 char ssid[] = "DesktopAP-2.4G";
 char pass[] = "ap191140";
-//char ssid[] = "VCWF";
-//char pass[] = "12930A11";
+
 int ontime=0,offtime=0;
 float freq=0,period=0;
 
