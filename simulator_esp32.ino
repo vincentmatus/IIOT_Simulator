@@ -107,14 +107,14 @@ void loop()
  
 }
 
-void freqMeasure(){
-   ontime = pulseIn(pulse_ip,HIGH);
-   offtime = pulseIn(pulse_ip,LOW);
-   period = ontime+offtime;
-   freq = 1000000.0/period;
-   Serial.print("freq = ");
-   Serial.println(freq);
-   Serial.println(period);
-   Serial.println(ontime);
-   Serial.println(offtime);
-}
+//void freqMeasure(){
+  // ontime = pulseIn(pulse_ip,HIGH);
+   //offtime = pulseIn(pulse_ip,LOW);
+   //period = ontime+offtime;
+   //freq = 1000000.0/period;
+   //Serial.print("freq = ");
+   //Serial.println(freq);
+   //Serial.println(period);
+   //Serial.println(ontime);
+   //Serial.println(offtime);
+//}
